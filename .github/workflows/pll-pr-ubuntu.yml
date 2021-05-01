@@ -10,9 +10,10 @@ jobs:
     runs-on:  ubuntu-latest
     strategy:
       matrix:
+          
         include:
           - java: 8
-            additional-maven-args: "-Pjacoco" #to start jacoco only for java 8
+            additional-maven-args: "-Pjacoco -DrepoTOken=$COVERALLS_REPO_TOKEN coveralls:report" #to start jacoco only for java 8
           - java: 11
         # test against several Java versions:
         
@@ -33,6 +34,8 @@ jobs:
       run: >
         mvn -f CIExample/pom.xml
         clean verify ${{ matrix.additional-maven-args }}
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
     - name: Generate JUnit Report
       run: >
         mvn -f CIExample/pom.xml
