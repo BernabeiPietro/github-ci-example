@@ -33,9 +33,14 @@ jobs:
       run: >
         mvn -f CIExample/pom.xml
         clean verify
+    - name: Generate JUnit Report
+      run: >
+        mvn -f CIExample/pom.xml
         surefire-report:report-only site:site -DgenerateReports=false #create reports as for test
+      if: ${{always()}}
     - name: Archive Junit Report
       uses: actions/upload-artifact@v2
+      if: ${{always()}}
       with:
         name: surefire-report-jdk-${{ matrix.java}}
         path: '**/target/site'     
