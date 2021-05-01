@@ -8,7 +8,7 @@ import org.junit.Test;
 public class App2Test {
 	private App app;
 	@Before
-	private void setup() {
+	public void setup() {
 		// TODO Auto-generated method stub
 		app=new App();
 	}
