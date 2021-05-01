@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         # test against several Java versions:
-        java: [8,11]
+        java: [8]
         # test against several OS:
         
     name: Build with Java ${{ matrix.java }} on Linux
@@ -30,4 +30,16 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml','**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
     - name: Build with Maven
-      run: mvn -f CIExample/pom.xml clean verify
+      run: >
+        mvn -f CIExample/pom.xml
+        clean verify
+        surefire-report:report-only site:site -DgenerateReports=false #create reports as for test
+    - name: Archive Junit Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: surefire-report-jdk-${{ matrix.java}}
+        path: '**/target/site'     
+
+
+
+
