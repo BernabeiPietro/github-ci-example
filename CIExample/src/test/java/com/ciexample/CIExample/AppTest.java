@@ -25,6 +25,11 @@ public class AppTest
         assertEquals("Hello",app.sayHello());
     }
     @Test
+    public void testSayHelloWithNullName()
+    {
+    	assertEquals("Hello", app.sayHello(null));
+    }
+    @Test
     public void testSayHelloWithName() {
     assertEquals("Hello World", app.sayHello("World"));
     }
