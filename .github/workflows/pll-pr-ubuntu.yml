@@ -3,7 +3,7 @@ name:  Java CI with Maven in Linux
 
 on:
   push:
-    
+  pull_request:
 #to define a step use - and define name, after uses and with. each - rapresent a step
 jobs:
   build:
