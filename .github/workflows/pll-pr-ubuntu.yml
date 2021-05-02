@@ -13,12 +13,11 @@ jobs:
           
         include:
           - java: 8
-            additional-maven-args: > 
-              -Pjacoco 
-              -DrepoToken=$COVERALLS_REPO_TOKEN coveralls:report #to start jacoco only for java 8
+            additional-maven-args: >
+              -Pjacoco
+              -DrepoToken=$COVERALLS_REPO_TOKEN
               -DpullRequest=${{ github.event.pull_request.number }}
               coveralls:report
-          - java: 11
         # test against several Java versions:
         
     name: Build with Java ${{ matrix.java }} on Linux
